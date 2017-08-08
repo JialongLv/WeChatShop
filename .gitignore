@@ -1,4 +1,10 @@
 .idea
 composer.lock
 *.log
+log
+extera
+extra
+runtime
+wx.php
+
 
