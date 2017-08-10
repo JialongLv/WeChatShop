@@ -53,6 +53,8 @@ class UserToken extends Token
         //如果存在，则不处理，如果不存在那么写新增一条user记录
         //生成令牌，准备缓存数据，写入缓存
         //把令牌返回到客户端去
+        //key:令牌
+        //value:wxResult,uid,scope
         $openid = $wxResult['openid'];
         $user = UserModel::getByOpenID($openid);
         if ($user){
