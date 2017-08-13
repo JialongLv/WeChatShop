@@ -8,15 +8,21 @@
 
 namespace app\api\controller\v1;
 
-
-use app\api\validate\AddressNew;
 use app\api\service\Token as TokenService;
+use app\api\controller\BaseController;
 use app\api\model\User as UserModel;
+use app\api\validate\AddressNew;
 use app\lib\exception\SuccessMessage;
 use app\lib\exception\UserException;
 
-class Address
+class Address extends BaseController
 {
+    //前置方法
+    protected $beforeActionList  = [
+        'checkPrimaryScope' =>['only'=>'createOrUpdateAddress']
+    ];
+
+
     public function createOrUpdateAddress(){
         $validata = new AddressNew();
         $validata->goCheck();
