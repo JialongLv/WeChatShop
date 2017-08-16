@@ -7,5 +7,6 @@
  */
 
 return[
-    'token_salt'=>'KAEWerjf123RFUalker321j'
+    'token_salt'=>'KAEWerjf123RFUalker321j',
+    'pay_back_url' => 'http://z.cn/api/v1/pay/notify'
 ];

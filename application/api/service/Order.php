@@ -146,16 +146,16 @@ class Order
         $oProducts = OrderProduct::where('order_id','=',$orderID)->select();
         $this->oProducts = $oProducts;
 
-        $this->oProducts = $this->getProductsByOrder($oProducts);
+        $this->products = $this->getProductsByOrder($oProducts);
         $status = $this->getOrderStatus();
         return $status;
     }
 
 
-
-    private function getOrderStatus(){
+    private function getOrderStatus()
+    {
         $status = [
-          'pass' => true,
+            'pass' => true,
             'orderPrice' => 0,
             'totalCount' => 0,
             'pStatusArray' => []
@@ -164,18 +164,16 @@ class Order
             $pStatus =
                 $this->getProductStatus(
                     $oProduct['product_id'], $oProduct['count'], $this->products);
-
             if (!$pStatus['haveStock']) {
                 $status['pass'] = false;
             }
-
             $status['orderPrice'] += $pStatus['totalPrice'];
             $status['totalCount'] += $pStatus['count'];
-
             array_push($status['pStatusArray'], $pStatus);
         }
         return $status;
     }
+
 
 
     private function getProductStatus($oPID,$oCount,$products){
