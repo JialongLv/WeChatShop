@@ -10,8 +10,8 @@ class Home extends Base{
   getBannerData(id,callback){
     var params = {
         url: 'banner/'+id,
-        sCallback:function(res){
-            callback && callback(res.items);
+        sCallback:function(data){
+            callback && callback(data.items);
         }
     }
 
@@ -28,6 +28,16 @@ class Home extends Base{
         };
         this.request(param);
     }
+
+  getProductsData(callback) {
+      var param = {
+          url: 'product/recent',
+          sCallback: function (data) {
+              callback && callback(data);
+          }
+      };
+      this.request(param);
+  }
 
 
 
