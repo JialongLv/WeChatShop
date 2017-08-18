@@ -2,9 +2,14 @@
 composer.lock
 *.log
 log
+<<<<<<< HEAD
 extera
 extra
 runtime
 wx.php
 
 
+=======
+extra
+runtime
+>>>>>>> dev
