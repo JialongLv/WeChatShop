@@ -24,9 +24,16 @@ Page({
   
   },
 
+  onReady:function(){
+      wx.setNavigationBarTitle({
+          title: this.data.name,
+      })
+
+  },
+
 _loadData:function(){
     theme.getProductsData(this.data.id,(data)=>{
-        console.log(data)
+        
         this.setData({
         themeInfo:data
         });

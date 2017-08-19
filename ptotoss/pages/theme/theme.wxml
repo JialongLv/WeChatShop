@@ -12,7 +12,7 @@
 
 <view class="theme-main">
 
-<template is="products" data="{{productsArr:themeInfo.products}}">
+<template is="products" data="{{products:themeInfo.products}}">
 </template>
 
 </view>
