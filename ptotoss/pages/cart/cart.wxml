@@ -52,6 +52,7 @@
 <image wx:else class="title-icon" src="../../imgs/icon/all.png"></image>
                 <text>全选({{selectedCounts}})</text>
 </view>
+
 <view class="all-price-submit {{account==0?'disabled':''}}" bindtap="submitOrder">
 <view class="accounts-btn">下单</view>
 <view class="price-text">￥{{account}}</view>

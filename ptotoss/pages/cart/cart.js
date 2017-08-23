@@ -139,5 +139,12 @@ Page({
         this.data.cartData[index].counts += counts;
         this._resetCartData();
     },
+
+    /*提交订单*/
+    submitOrder: function (event) {
+        wx.navigateTo({
+            url: '../order/order?account=' + this.data.account + '&from=cart'
+        });
+    },
  
 })

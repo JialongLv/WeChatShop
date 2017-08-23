@@ -1,5 +1,6 @@
 
 import { Config } from '../utils/config.js';
+import { Token } from 'token.js';
 
 
 class Base{
@@ -7,7 +8,9 @@ class Base{
         this.baseRequestUrl = Config.resUrl;
     }
 
-    request(params){
+//http 请求类, 当noRefech为true时，不做未授权重试机制
+    request(params,noRefetch){
+        var that = this;
         var url = this.baseRequestUrl + params.url;
 
     if(!params.type)
@@ -27,7 +30,23 @@ class Base{
                 // if(params.sCallBack){
                 //     params.sCallBack(res);
                 // }
-                params.sCallback&&params.sCallback(res.data);
+
+                var code = res.statusCode.toString();
+                var startChar = code.charAt(0);
+                if (startChar == '2') {
+                    params.sCallback && params.sCallback(res.data);
+                } else {
+                    if (code == '401') {
+                        if (!noRefetch) {
+                            that._refetch(params);
+                        }
+                    }
+                    that._processError(res);
+                    if(noRefetch){
+                        params.eCallback && params.eCallback(res.data);
+                    }
+                    
+                }
                 
 
             },
@@ -36,6 +55,18 @@ class Base{
             },
             
         })
+    }
+
+
+    _processError(err) {
+        console.log(err);
+    }
+
+    _refetch(param) {
+        var token = new Token();
+        token.getTokenFromServer((token) => {
+            this.request(param, true);
+        });
     }
 
 // 获取元素上的绑定的值

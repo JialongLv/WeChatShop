@@ -4,7 +4,9 @@
         "pages/product/product",
         "pages/theme/theme",
         "pages/category/category",
-        "pages/cart/cart"
+        "pages/cart/cart",
+        "pages/order/order",
+        "pages/pay-result/pay-result"
     ],
     "window": {
         "navigationBarBackgroundColor": "#ffffff",
