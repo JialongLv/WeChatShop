@@ -20,5 +20,14 @@ Page({
 
   },
 
+  viewOrder: function () {
+      
+          //返回上一级
+          wx.navigateBack({
+              delta: 1
+          })
+      }
+  
+
   
 })

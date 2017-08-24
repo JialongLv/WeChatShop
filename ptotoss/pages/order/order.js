@@ -21,28 +21,47 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var productsArr;
-    this.data.account = options.account;
+      var from = options.from;
+      if(from == 'cart'){
+          this._fromCart(options.account)
+      }
+      else{
+         var id = options.id; 
+         this._fromOrder(id);
+      }
+    
+  },
 
-    productsArr = cart.getCartDataFromLocal(true);
-     
-    this.setData({
-        productsArr: productsArr,
-        account: options.account,
-        orderStatus: 0
-    });
+  _fromCart:function(account){
+      var productsArr;
+      this.data.account = account;
 
-    /*显示收获地址*/
-    address.getAddress((res) => {
-        this._bindAddressInfo(res);
-    });
+      productsArr = cart.getCartDataFromLocal(true);
+
+      this.setData({
+          productsArr: productsArr,
+          account: account,
+          orderStatus: 0
+      });
+
+      /*显示收获地址*/
+      address.getAddress((res) => {
+          this._bindAddressInfo(res);
+      });
+
   },
 
   onShow: function () {
-      if (this.data.id) {
+      if(this.data.id){
+          this._fromOrder(this.data.id);
+      }
+  },
+
+  _fromOrder:function(id){
+      if (id) {
           var that = this;
           //下单后，支付成功或者失败后，点左上角返回时能够更新订单状态 所以放在onshow中
-          var id = this.data.id;
+        //   var id = this.data.id;
           order.getOrderInfoById(id, (data) => {
               that.setData({
                   orderStatus: data.status,
@@ -60,7 +79,10 @@ Page({
               that._bindAddressInfo(addressInfo);
           });
       }
+      
   },
+
+
 
 
   editAddress:function(event){
@@ -252,6 +274,8 @@ Page({
           }
       });
   },
+
+  
 
 
   
