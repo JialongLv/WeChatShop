@@ -17,6 +17,7 @@ use app\api\model\Order as OrderModel;
 use app\api\validate\IDMustBePostiveInt;
 use app\api\validate\OrderPlace;
 use app\api\validate\PagingParameter;
+use app\lib\exception\SuccessMessage;
 
 class Order extends BaseController
 {
@@ -113,6 +114,14 @@ class Order extends BaseController
     }
 
 
+    public function delivery($id){
+        (new IDMustBePostiveInt())->goCheck();
+        $order = new OrderService();
+        $success = $order->delivery($id);
+        if($success){
+            return new SuccessMessage();
+        }
+    }
 
 
 
