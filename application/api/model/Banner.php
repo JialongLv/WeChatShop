@@ -11,6 +11,7 @@ namespace app\api\model;
 
 class Banner extends BaseModel
 {
+    //php think optimize:schema
     protected $hidden=['delete_time','update_time'];
 
 
